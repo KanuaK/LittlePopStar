@@ -15,7 +15,7 @@ void Star::setColor(unsigned int _color) {
 }
 
 void Star::setPickup(bool _pickup) {
-	pickup = _pickup;
+	pickup=_pickup;
 }
 
 Starmat::Starmat(int _row, int _col) {
@@ -23,3 +23,12 @@ Starmat::Starmat(int _row, int _col) {
 	for (int i = 0; i < _row; ++i)
 		(*this)[i].resize(_col);
 }
+
+Star Starmat::getStar(int _row, int _col) {
+	return (*this)[_row][_col];
+}
+
+void Starmat::setStar(int _row, int _col, Star _star) {
+	(*this)[_row][_col] = _star;
+}
+

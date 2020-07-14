@@ -20,4 +20,6 @@ class Starmat : public std::vector<Stars> {
 public:
 	Starmat() {}
 	Starmat(int _row, int _col);
+	Star getStar(int _row, int _col);
+	void setStar(int _row, int _col, Star _star);
 };
