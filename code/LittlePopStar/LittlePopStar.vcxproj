@@ -145,9 +145,13 @@
   <ItemGroup>
     <ClCompile Include="Common\Stars.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Model\Model.cpp" />
+    <ClCompile Include="ViewModel\ViewModel.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Common\Stars.h" />
+    <ClInclude Include="Model\Model.h" />
+    <ClInclude Include="ViewModel\ViewModel.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
