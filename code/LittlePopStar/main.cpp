@@ -1,8 +1,11 @@
 #include <FL/Fl.H>
 #include <FL/Fl_Window.H>
 #include <FL/Fl_Box.H>
-int main(int argc, char* argv[])
-{
+#include ".\Common\Stars.h"
+Starmat smat;
+int main(int argc, char* argv[]) {
+    smat = Starmat(5, 5);
+
     Fl_Window* window;
     Fl_Box* box;
     window = new  Fl_Window(450, 330, "First App!");
