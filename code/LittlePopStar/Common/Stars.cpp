@@ -1,6 +1,6 @@
 #include "Stars.h"
 
-Star::Star(Fl_Color _color, bool _pickup) : color(_color), pickup(_pickup) {}
+Star::Star(unsigned int _color, bool _pickup) : color(_color), pickup(_pickup) {}
 
 Starmat::Starmat(int _row, int _col) : row(_row), col(_col) {
 	this->resize(_row);

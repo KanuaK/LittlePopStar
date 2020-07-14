@@ -4,10 +4,10 @@
 
 class Star {
 public:
-	Star() :color(FL_BLUE), pickup(false) {}
-	Star(Fl_Color _color, bool _pickup);
+	Star() :color(0), pickup(false) {}
+	Star(unsigned int _color, bool _pickup);
 private:
-	Fl_Color color;
+	unsigned int color;
 	bool pickup;
 };
 
