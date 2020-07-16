@@ -13,10 +13,10 @@ void StarMap::initStars() {
 }
 
 
-void StarMap::pickupStar(int _row, int _col) {
+bool StarMap::pickupStar(int _row, int _col) {
 	if (_row >= row || _col >= col) {
 		throw "no this star";
-		return;
+		return false;
 	}
 	std::queue<std::pair<int, int> > que;
 	while (!que.empty()) que.pop();
@@ -46,13 +46,26 @@ void StarMap::pickupStar(int _row, int _col) {
 		}
 
 	}
-
+	sendNotification(0);
+	return true;
 }
 
-void StarMap::pickupStar(int _num) {
+bool StarMap::pickupStar(int _num) {
 	if (_num > row * col) {
 		throw "no this star";
-		return;
+		return false;
 	}
-	pickupStar(_num / col, _num % col);
+	return pickupStar(_num / col, _num % col);
+}
+
+void StarMap::attachNotification(std::function<void(int)> _notification_func) {
+	sendNotification = _notification_func;
+}
+
+void StarMap::detachNotification() {
+	sendNotification = std::function<void(int)>();
+}
+
+std::shared_ptr<Starmat> StarMap::getStarmat() {
+	return std::make_shared<Starmat>(starMap);
 }
