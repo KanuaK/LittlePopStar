@@ -1,7 +1,7 @@
 #include "ViewModel.h"
 #include <utility>
 
-StarMapVM::StarMapVM(int _row, int _col, unsigned int _colorNum) :SM(_row, _col, _colorNum) {}
+StarMapVM::StarMapVM() {}
 
 void StarMapVM::attachNotification(std::function<void(int)> _notification_func) {
 	sendNotification = _notification_func;

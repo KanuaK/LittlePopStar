@@ -31,6 +31,9 @@
     <Filter Include="源文件\Common">
       <UniqueIdentifier>{cf0992d9-e513-4932-be25-88d743ea1b9b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="源文件\ViewModel\Commands">
+      <UniqueIdentifier>{e6d7b3f0-1af6-4229-9b6c-823379725411}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -44,6 +47,9 @@
     </ClCompile>
     <ClCompile Include="ViewModel\ViewModel.cpp">
       <Filter>源文件\ViewModel</Filter>
+    </ClCompile>
+    <ClCompile Include="ViewModel\Commands\PickupCommand.cpp">
+      <Filter>源文件\ViewModel\Commands</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

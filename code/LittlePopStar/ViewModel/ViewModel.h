@@ -5,7 +5,7 @@
 #include <memory>
 class StarMapVM {
 public:
-	StarMapVM(int _row, int _col, unsigned int _colorNum);
+	StarMapVM();
 	void attachNotification(std::function<void(int)>);//add notification
 	void detachNotification();
 	void attachModel(const std::shared_ptr<StarMap>&);
