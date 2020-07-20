@@ -153,6 +153,8 @@
     <ClInclude Include="Common\Stars.h" />
     <ClInclude Include="Model\Model.h" />
     <ClInclude Include="ViewModel\ViewModel.h" />
+    <ClInclude Include="View\StarMapView.h" />
+    <ClInclude Include="Window\MainWindow.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

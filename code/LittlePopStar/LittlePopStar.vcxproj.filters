@@ -62,5 +62,11 @@
     <ClInclude Include="ViewModel\ViewModel.h">
       <Filter>源文件\ViewModel</Filter>
     </ClInclude>
+    <ClInclude Include="View\StarMapView.h">
+      <Filter>源文件\View</Filter>
+    </ClInclude>
+    <ClInclude Include="Window\MainWindow.h">
+      <Filter>源文件\Window</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
