@@ -3,7 +3,7 @@
 #include <FL/FL.H>
 #include <FL/FL_Window.H>
 #include <FL/Fl_Menu_Bar.H>
-#include "StarMapView.h"
+#include "..\View\StarMapView.h"
 
 class MainWindow : public Fl_Window {
 public:

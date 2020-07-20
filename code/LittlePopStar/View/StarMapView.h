@@ -6,7 +6,7 @@
 #include <functional>
 #include <memory>
 
-#include "Model/Model.h"
+#include "../Model/Model.h"
 
 int ColorMap[8] = { 88, 63, 95, 216, 248, 223, 255, 56 };	//maps the integer values stored in the star objects of the model to default FLTK colour values
 //red, green, yellow, blue, magenta, cyan, white, blacks
