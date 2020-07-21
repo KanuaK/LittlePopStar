@@ -51,6 +51,15 @@
     <ClCompile Include="ViewModel\Commands\PickupCommand.cpp">
       <Filter>源文件\ViewModel\Commands</Filter>
     </ClCompile>
+    <ClCompile Include="Window\MainWindow.cpp">
+      <Filter>源文件\Window</Filter>
+    </ClCompile>
+    <ClCompile Include="View\StarMapView.cpp">
+      <Filter>源文件\View</Filter>
+    </ClCompile>
+    <ClCompile Include="App\App.cpp">
+      <Filter>源文件\App</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Common\Stars.h">
@@ -67,6 +76,9 @@
     </ClInclude>
     <ClInclude Include="Window\MainWindow.h">
       <Filter>源文件\Window</Filter>
+    </ClInclude>
+    <ClInclude Include="App\App.h">
+      <Filter>源文件\App</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

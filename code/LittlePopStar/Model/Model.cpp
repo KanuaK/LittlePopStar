@@ -14,6 +14,8 @@ void StarMap::initStars() {
 
 
 bool StarMap::pickupStar(int _row, int _col) {
+	printf("pickup %d %d\n",_row,_col);//debug
+
 	if (_row >= row || _col >= col) {
 		throw "no this star";
 		return false;
@@ -41,12 +43,13 @@ bool StarMap::pickupStar(int _row, int _col) {
 				Star tmp = starMap.getStar(t.first, t.second);
 				if (tmp.getPickup()!=flag || tmp.getColor()!=curColor) continue;
 				tmp.setPickup(!flag);
+				starMap.setStar(t.first, t.second, tmp);//!!
 				que.push(t);
 			}
 		}
 
 	}
-	sendNotification(0);
+	//sendNotification(0);
 	return true;
 }
 
@@ -58,13 +61,13 @@ bool StarMap::pickupStar(int _num) {
 	return pickupStar(_num / col, _num % col);
 }
 
-void StarMap::attachNotification(std::function<void(int)> _notification_func) {
-	sendNotification = _notification_func;
+void StarMap::attachNotification(std::function<void(int)>&& _notification_func) {
+	sendNotification = std::move(_notification_func);
 }
 
-void StarMap::detachNotification() {
+/*void StarMap::detachNotification() {
 	sendNotification = std::function<void(int)>();
-}
+}*/
 
 std::shared_ptr<Starmat> StarMap::getStarmat() {
 	return std::make_shared<Starmat>(starMap);

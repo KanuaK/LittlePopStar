@@ -14,7 +14,8 @@ void StarMapVM::detachNotification() {
 std::function<void(int)> StarMapVM::getNotification() {
 	return [this](int uID) {
 		if (uID == 0) {
-			this->sendNotification(uID);
+			puts("notification in model");
+			//this->sendNotification(uID);
 		}
 	};
 }
