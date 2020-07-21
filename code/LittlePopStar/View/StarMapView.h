@@ -11,9 +11,6 @@
 
 const int STAR_BUTTON_DIMENSION = 10;	//used to determine the dimension of the StarButton objects in the view
 
-int ColorMap[8] = { 88, 63, 95, 216, 248, 223, 255, 56 };	//maps the integer values stored in the star objects of the model to default FLTK colour values
-//red, green, yellow, blue, magenta, cyan, white, black
-
 class StarButton : public Fl_Button {
 public:
 	StarButton(int _row, int _col);

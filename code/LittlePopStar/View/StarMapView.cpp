@@ -10,6 +10,9 @@
 #include "StarMapView.h"
 #include "../Common/Stars.h"
 
+int ColorMap[8] = { 88, 63, 95, 216, 248, 223, 255, 56 };	//maps the integer values stored in the star objects of the model to default FLTK colour values
+//red, green, yellow, blue, magenta, cyan, white, black
+
 StarMapView::StarMapView(int _rows, int _cols) : m_rows(_rows), m_cols(_cols), Fl_Group(0, 0, _cols* STAR_BUTTON_DIMENSION, _rows* STAR_BUTTON_DIMENSION){
 	initialize();
 };
