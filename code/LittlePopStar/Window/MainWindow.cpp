@@ -2,8 +2,8 @@
 #include <FL/FL_Window.H>
 #include <FL/Fl_Menu_Bar.H>
 
-#include "StarMapView.h"
-#include "MainWindow.h"
+#include "../View/StarMapView.h"
+#include "../Window/MainWindow.h"
 
 #include <functional>
 

@@ -8,7 +8,7 @@
 #include <utility>
 
 #include "StarMapView.h"
-#include "Common/Stars.h"
+#include "../Common/Stars.h"
 
 StarMapView::StarMapView(int _rows, int _cols) : m_rows(_rows), m_cols(_cols), Fl_Group(0, 0, _cols* STAR_BUTTON_DIMENSION, _rows* STAR_BUTTON_DIMENSION){
 	initialize();
@@ -46,8 +46,8 @@ void StarMapView::pickup_cb(Fl_Widget* Bp, void* v)
 void StarMapView::initialize() {
 	for (int i = 0; i < m_rows; i++) {
 		for (int j = 0; j < m_cols; j++) {
-			StarButton temp = StarButton(j, i);
-			temp.callback((Fl_Callback*) &pickup_cb, &m_cmdPickup);
+			StarButton* temp = &StarButton(j, i);
+			temp->callback((Fl_Callback*) &pickup_cb, &m_cmdPickup);
 			add(temp);
 		}
 	}
