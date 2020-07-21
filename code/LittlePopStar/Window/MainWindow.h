@@ -14,7 +14,7 @@ public:
 	MainWindow& operator=(const MainWindow&) = delete;
 	~MainWindow();
 
-	const StarMapView& get_StarMapView();
+	StarMapView& get_StarMapView();
 
 	void attach_CloseCommand(std::function<void()>&& cf);
 	std::function<void()> detach_CloseCommand();

@@ -18,7 +18,7 @@ MainWindow::~MainWindow() {
 	return;
 }
 
-const StarMapView& MainWindow::get_StarMapView() {
+StarMapView& MainWindow::get_StarMapView() {
 	return m_starMapView;
 }
 

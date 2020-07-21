@@ -9,7 +9,7 @@
 
 #include "../Model/Model.h"
 
-const int STAR_BUTTON_DIMENSION = 10;	//used to determine the dimension of the StarButton objects in the view
+const int STAR_BUTTON_DIMENSION = 100;	//used to determine the dimension of the StarButton objects in the view
 
 class StarButton : public Fl_Button {
 public:
