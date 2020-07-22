@@ -6,8 +6,8 @@ class Star {
 public:
 	Star() :color(0), pickup(false) {}
 	Star(unsigned int _color, bool _pickup);
-	unsigned int getColor();
-	bool getPickup();
+	unsigned int getColor() const;
+	bool getPickup() const;
 	void setColor(unsigned int _color);
 	void setPickup(bool _pickup);
 private:
@@ -20,6 +20,6 @@ class Starmat : public std::vector<Stars> {
 public:
 	Starmat() {}
 	Starmat(int _row, int _col);
-	Star getStar(int _row, int _col);
-	void setStar(int _row, int _col, Star _star);
+	const Star& getStar(int _row, int _col) const;
+	Star& setStar(int _row, int _col);
 };

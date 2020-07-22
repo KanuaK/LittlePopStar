@@ -10,6 +10,9 @@ public:
 	void initStars();
 	bool pickupStar(int _row, int _col);
 	bool pickupStar(int _num);
+	void pickdownStar(); //set pickup=false for all stars
+	bool checkGameOver(); //check if game is over(No star exists or no star can be eliminated)
+	void popStar(); //eliminate all stars picked up
 	void attachNotification(std::function<void(int)>&&);
 	//void detachNotification();
 	std::shared_ptr<Starmat> getStarmat();
