@@ -14,13 +14,13 @@ void StarMapVM::detachNotification() {
 std::function<void(int)> StarMapVM::getNotification() {
 	return [this](int uID) {
 		if (uID == 0) {
-			puts("notification in model");
-			//this->sendNotification(uID);
+			//puts("notification in model");
+			this->sendNotification(uID);
 		}
 	};
 }
 
-void StarMapVM::attachModel(const std::shared_ptr<StarMap>& refModel) {
+void StarMapVM::attachModel(StarMap* refModel) {
 	m_refModel = refModel;
 }
 

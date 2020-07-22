@@ -29,7 +29,7 @@ public:
 	StarMapView& operator=(const StarMapView&) = delete;	//do not automatically defince assignment operator
 	~StarMapView();
 
-	void attachModel(const std::shared_ptr<StarMap>&);	//link the model so that it can be accessed to update the view
+	void attachModel(StarMap*);	//link the model so that it can be accessed to update the view
 	std::shared_ptr<StarMap> detachModel();	//delink the model
 
 	void attach_PickupCommand(std::function<bool(int, int)>&& cf);
@@ -47,5 +47,5 @@ private:
 	std::function<bool(int, int)> m_cmdPickup;	//takes as arguements the row and col of the StarButton that was picked up
 
 	const int m_rows, m_cols;
-	std::shared_ptr<StarMap> m_refModel;
+	StarMap* m_refModel;
 };

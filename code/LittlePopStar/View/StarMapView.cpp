@@ -23,7 +23,7 @@ StarMapView::~StarMapView() {
 	return;
 }
 
-void StarMapView::attachModel(const std::shared_ptr<StarMap>& _refModel) {
+void StarMapView::attachModel(StarMap* _refModel) {
 	m_refModel = _refModel;
 }
 

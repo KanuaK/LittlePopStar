@@ -3,6 +3,11 @@
 
 StarMap::StarMap(int _row, int _col,unsigned int _colorNum) :starMap(_row, _col),row(_row),col(_col),colorNum(_colorNum) {
 	initStars();
+	//puts("StarMap construct"); system("pause");
+	sendNotification = [](int x) {
+		puts("initialize notification");
+		return x;
+	};
 }
 
 void StarMap::initStars() {
@@ -14,7 +19,7 @@ void StarMap::initStars() {
 
 
 bool StarMap::pickupStar(int _row, int _col) {
-	printf("pickup %d %d\n",_row,_col);//debug
+	printf("pickup %d %d\n",_row,_col);//debug information
 
 	if (_row >= row || _col >= col) {
 		throw "no this star";
@@ -49,7 +54,7 @@ bool StarMap::pickupStar(int _row, int _col) {
 		}
 
 	}
-	//sendNotification(0);
+	sendNotification(0);
 	return true;
 }
 

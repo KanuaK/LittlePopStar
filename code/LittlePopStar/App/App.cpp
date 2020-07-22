@@ -4,12 +4,12 @@
 
 GameApp::GameApp() : m_model(5, 5, 4), m_wndMain(5, 5) {
 	//binding
-	m_viewmodel.attachModel(std::make_shared<StarMap>(m_model));
+	m_viewmodel.attachModel(&m_model);
 	m_model.attachNotification(m_viewmodel.getNotification());
-
+	m_viewmodel.attachNotification(m_wndMain.get_StarMapView().getNotification());
 	//properties
-	m_wndMain.get_StarMapView().attachModel(std::make_shared<StarMap>(m_model));
-	m_wndMain.get_StarMapView().update(0);
+	m_wndMain.get_StarMapView().attachModel(&m_model);
+	m_wndMain.get_StarMapView().update();
 	
 	//commands
 	m_wndMain.get_StarMapView().attach_PickupCommand(m_viewmodel.getPickupCommand());
