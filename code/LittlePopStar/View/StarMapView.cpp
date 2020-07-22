@@ -31,12 +31,12 @@ std::shared_ptr<StarMap> StarMapView::detachModel() {
 	return std::shared_ptr<StarMap>(std::move(m_refModel));
 }
 
-void StarMapView::attach_PickupCommand(std::function<void(int, int)>&& cf) {
+void StarMapView::attach_PickupCommand(std::function<bool(int, int)>&& cf) {
 	m_cmdPickup = std::move(cf);
 }
 
-std::function<void(int, int)> StarMapView::detach_PickupCommand() {
-	return std::function<void(int, int)>(std::move(m_cmdPickup));
+std::function<bool(int, int)> StarMapView::detach_PickupCommand() {
+	return std::function<bool(int, int)>(std::move(m_cmdPickup));
 }
 
 void StarMapView::pickup_cb(Fl_Widget* Bp, void* v)
