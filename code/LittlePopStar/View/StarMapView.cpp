@@ -61,8 +61,7 @@ void StarMapView::initialize() {
 	return;
 }
 
-void StarMapView::update(int uID) {
-	if (uID != 0)	return;
+void StarMapView::update() {
 	std::shared_ptr<Starmat> starMat = m_refModel->getStarmat();
 	Fl_Widget* currentButton;
 	Star* currentStar;
@@ -79,10 +78,16 @@ void StarMapView::update(int uID) {
 				currentButton->color(FL_GRAY);	//set button color to grey
 				currentButton->label(0);	//remove the star
 			}
-			currentButton->redraw();
 		}
 	}
+	redraw();
 	return;
+}
+
+std::function<void(int)> StarMapView::getNotification() {
+	return [this](int uID) {
+		if (uID == 0)	this->update();
+	};
 }
 
 StarButton::StarButton(	int _row, int _col) : m_row(_row), m_col(_col),

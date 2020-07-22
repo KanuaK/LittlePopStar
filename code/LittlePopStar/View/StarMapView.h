@@ -35,7 +35,9 @@ public:
 	void attach_PickupCommand(std::function<bool(int, int)>&& cf);
 	std::function<bool(int, int)> detach_PickupCommand();
 
-	void update(int uID);	//updates the view to the values stored in the model. this is the function that should be assigned to StarMapVM.sendNotification
+	std::function<void(int)> getNotification();
+
+	void update();	//updates the view to the values stored in the model. this is the function that should be assigned to StarMapVM.sendNotification
 
 private:
 	void initialize();	//initialize StarMapView, including adding a button widget to the array of children widgets for each star in the model
