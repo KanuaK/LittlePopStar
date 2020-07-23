@@ -13,10 +13,10 @@ void StarMapVM::detachNotification() {
 
 std::function<void(int)> StarMapVM::getNotification() {
 	return [this](int uID) {
-		if (uID == 0) {
 			//puts("notification in model");
 			this->sendNotification(uID);
-		}
+			//uID = 0 Star info changed
+			//      1 gameOver 
 	};
 }
 

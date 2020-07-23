@@ -64,7 +64,7 @@ void StarMapView::initialize() {
 void StarMapView::update() {
 	std::shared_ptr<Starmat> starMat = m_refModel->getStarmat();
 	Fl_Widget* currentButton;
-	Star* currentStar;
+	const Star* currentStar;
 
 	for (int i = 0; i < m_rows; i++) {
 		for (int j = 0; j < m_cols; j++) {

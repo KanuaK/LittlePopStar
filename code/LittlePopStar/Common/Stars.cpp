@@ -2,11 +2,11 @@
 
 Star::Star(unsigned int _color, bool _pickup) : color(_color), pickup(_pickup) {}
 
-unsigned int Star::getColor() {
+unsigned int Star::getColor() const {
 	return color;
 }
 
-bool Star::getPickup() {
+bool Star::getPickup() const {
 	return pickup;
 }
 
@@ -24,11 +24,11 @@ Starmat::Starmat(int _row, int _col) {
 		(*this)[i].resize(_col);
 }
 
-Star Starmat::getStar(int _row, int _col) {
+const Star& Starmat::getStar(int _row, int _col) const {
 	return (*this)[_row][_col];
 }
 
-void Starmat::setStar(int _row, int _col, Star _star) {
-	(*this)[_row][_col] = _star;
+Star& Starmat::setStar(int _row, int _col) {
+	return (*this)[_row][_col];
 }
 
