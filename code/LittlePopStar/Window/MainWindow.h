@@ -16,13 +16,7 @@ public:
 
 	StarMapView& get_StarMapView();
 
-	void attach_CloseCommand(std::function<void()>&& cf);
-	std::function<void()> detach_CloseCommand();
-
 private:
-	static void close_cb(Fl_Window* pW, void* pD);
-
-	std::function<void()> m_cmdClose;
 
 	StarMapView m_starMapView;
 	//Fl_Menu_Bar m_menuBar;
