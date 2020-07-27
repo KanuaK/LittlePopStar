@@ -15,7 +15,7 @@ public:
 	std::function<void()> getRestartCommand(); //return a function that will reset the StarMap
 
 	//properties
-	std::shared_ptr<Starmat> getStarmat();
+	Starmat* getStarmat();
 private:
 	StarMap* m_refModel;
 	std::function<void(int)> sendNotification;//fire

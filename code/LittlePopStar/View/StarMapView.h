@@ -3,11 +3,14 @@
 #include <FL/Fl_Group.H>
 #include <FL/Fl_Button.H>
 #include <FL/Enumerations.H>
+#include <FL/Fl_Image.H>
+#include <FL/Fl_PNG_Image.H>
 
 #include <functional>
 #include <memory>
+#include <vector>
 
-#include "../Model/Model.h"
+#include "../Common/Stars.h"
 
 const int STAR_BUTTON_DIMENSION = 100;	//used to determine the dimension of the StarButton objects in the view
 
@@ -29,8 +32,8 @@ public:
 	StarMapView& operator=(const StarMapView&) = delete;	//do not automatically defince assignment operator
 	~StarMapView();
 
-	void attachModel(StarMap*);	//link the model so that it can be accessed to update the view
-	std::shared_ptr<StarMap> detachModel();	//delink the model
+	void attachStarmat(Starmat*);	//link the model so that it can be accessed to update the view
+//	std::shared_ptr<Starmat> detachModel();	//delink the model
 
 	void attach_PickupCommand(std::function<bool(int, int)>&& cf);
 	std::function<bool(int, int)> detach_PickupCommand();
@@ -46,6 +49,8 @@ private:
 
 	std::function<bool(int, int)> m_cmdPickup;	//takes as arguements the row and col of the StarButton that was picked up
 
+	std::vector<Fl_Image*> m_starTextures;
+
 	const int m_rows, m_cols;
-	StarMap* m_refModel;
+	Starmat* m_refStarmat;
 };

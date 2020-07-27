@@ -28,6 +28,6 @@ std::shared_ptr<StarMap> StarMapVM::detachModel() {
 	return std::shared_ptr<StarMap>(std::move(m_refModel));
 }
 
-std::shared_ptr<Starmat> StarMapVM::getStarmat() {
+Starmat* StarMapVM::getStarmat() {
 	return m_refModel->getStarmat();
 }
