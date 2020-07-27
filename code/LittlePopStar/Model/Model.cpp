@@ -137,6 +137,6 @@ void StarMap::attachNotification(std::function<void(int)>&& _notification_func) 
 	sendNotification = std::function<void(int)>();
 }*/
 
-std::shared_ptr<Starmat> StarMap::getStarmat() {
-	return std::make_shared<Starmat>(starMap);
+Starmat* StarMap::getStarmat() {
+	return &starMap;
 }

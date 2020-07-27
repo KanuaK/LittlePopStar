@@ -15,7 +15,7 @@ public:
 	void popStar(); //eliminate all stars picked up
 	void attachNotification(std::function<void(int)>&&);
 	//void detachNotification();
-	std::shared_ptr<Starmat> getStarmat();
+	Starmat* getStarmat();
 private:
 	Starmat starMap;
 	std::function<void(int)> sendNotification;//fire
