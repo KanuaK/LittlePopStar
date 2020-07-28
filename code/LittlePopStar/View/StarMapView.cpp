@@ -69,7 +69,7 @@ void StarMapView::initialize() {
 	Fl_Color backgroundColor = fl_rgb_color(200, 191, 231);
 	for (int row = 0; row < m_rows; row++) {
 		for (int col = 0; col < m_cols; col++) {
-			temp = new Fl_Button(col * STAR_BUTTON_DIMENSION, row * STAR_BUTTON_DIMENSION, STAR_BUTTON_DIMENSION, STAR_BUTTON_DIMENSION, "");
+			temp = new Fl_Button(col * STAR_BUTTON_DIMENSION, row * STAR_BUTTON_DIMENSION + MENU_BAR_HEIGHT, STAR_BUTTON_DIMENSION, STAR_BUTTON_DIMENSION, "");
 			temp->callback((Fl_Callback*) &pickup_cb, &m_cmdPickup);
 			temp->align(FL_ALIGN_INSIDE|FL_ALIGN_BOTTOM);//FL_ALIGN_IMAGE_OVER_TEXT);
 			temp->labelsize(0);//_FL_IMAGE_LABEL);
