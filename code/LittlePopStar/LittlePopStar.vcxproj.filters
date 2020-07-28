@@ -13,9 +13,6 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="源文件\View">
-      <UniqueIdentifier>{10f6abdc-bd4f-4f64-b6d8-9c8a8c9b0eb3}</UniqueIdentifier>
-    </Filter>
     <Filter Include="源文件\Model">
       <UniqueIdentifier>{f5eef804-0b32-416d-8784-f020a7ce4327}</UniqueIdentifier>
     </Filter>
@@ -33,6 +30,9 @@
     </Filter>
     <Filter Include="源文件\ViewModel\Commands">
       <UniqueIdentifier>{e6d7b3f0-1af6-4229-9b6c-823379725411}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\View">
+      <UniqueIdentifier>{10f6abdc-bd4f-4f64-b6d8-9c8a8c9b0eb3}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -59,6 +59,9 @@
     </ClCompile>
     <ClCompile Include="App\App.cpp">
       <Filter>源文件\App</Filter>
+    </ClCompile>
+    <ClCompile Include="ViewModel\Commands\RestartCommand.cpp">
+      <Filter>源文件\ViewModel\Commands</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

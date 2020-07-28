@@ -3,6 +3,6 @@
 std::function<void()> StarMapVM::getRestartCommand() {
 	return [this]()->bool {
 		this->m_refModel->initStars();
-		return;
+		return true;
 	};
 }
