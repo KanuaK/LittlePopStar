@@ -16,6 +16,8 @@ public:
 
 	//properties
 	Starmat* getStarmat();
+	int* getScore();
+	const std::vector<Star>& getPopVec();
 private:
 	StarMap* m_refModel;
 	std::function<void(int)> sendNotification;//fire

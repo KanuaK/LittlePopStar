@@ -17,6 +17,7 @@ void StarMap::initStars() {
 		for (int j = 0; j < col; j++) {
 			starMap.setStar(i, j)= Star(rand() % colorNum + 1, false);
 		}
+	score = 0;
 }
 
 
@@ -32,12 +33,9 @@ bool StarMap::pickupStar(int _row, int _col) {
 		return true;
 	}
 	const Star& cur = starMap.getStar(_row, _col);
-	if (cur.getPickup()) {
-		popStar();
-		if(checkGameOver()) sendNotification(1);
-		sendNotification(0);
-		return true;
-	}
+	if (cur.getPickup()) 
+		return popStar();
+
 	pickdownStar();
 	if (!cur.getColor()) {
 		sendNotification(0);
@@ -99,18 +97,24 @@ bool StarMap::checkGameOver() {
 	return true;
 }
 
-void StarMap::popStar() {
+bool StarMap::popStar() {
 	int cnt = 0;
 	for (int i = 0; i < row; i++)
 		for (int j = 0; j < col; j++)
 			if (starMap.getStar(i, j).getPickup()) cnt++;
-	if (cnt <= 1) return;
+	if (cnt <= 1) {
+		sendNotification(0);
+		return true;
+	}
+	score += cnt * (cnt + 1) / 2;
+	popVec.clear();
 	int l = 0;
 	for (int j = 0; j < col; j++) {
 		int k = row-1;
 		for (int i = row - 1; i >= 0; i--) {
 			const Star &tmp = starMap.getStar(i, j);
 			if (tmp.getPickup()) {
+				popVec.push_back(tmp);
 				starMap.setStar(i, j) = emptyStar;
 			}
 			if (tmp.getColor()) {
@@ -127,6 +131,9 @@ void StarMap::popStar() {
 	for (; l < col; l++)
 		for (int i = 0; i < row; i++)
 			starMap.setStar(i, l) = emptyStar;
+	if (checkGameOver()) sendNotification(1);
+	sendNotification(0);
+	return true;
 }
 
 void StarMap::attachNotification(std::function<void(int)>&& _notification_func) {
@@ -139,4 +146,12 @@ void StarMap::attachNotification(std::function<void(int)>&& _notification_func) 
 
 Starmat* StarMap::getStarmat() {
 	return &starMap;
+}
+
+const std::vector<Star>& StarMap::getPopVec() {
+	return popVec;
+}
+
+int* StarMap::getScore() {
+	return &score;
 }

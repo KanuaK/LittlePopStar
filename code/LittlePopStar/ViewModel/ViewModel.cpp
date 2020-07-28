@@ -31,3 +31,11 @@ std::shared_ptr<StarMap> StarMapVM::detachModel() {
 Starmat* StarMapVM::getStarmat() {
 	return m_refModel->getStarmat();
 }
+
+int* StarMapVM::getScore() {
+	return m_refModel->getScore();
+}
+
+const std::vector<Star>& StarMapVM::getPopVec() {
+	return m_refModel->getPopVec();
+}
