@@ -2,6 +2,8 @@
 #include <memory>
 #include "../Model/Model.h"
 
+#include <iostream>
+
 GameApp::GameApp() : m_model(5, 5, 4), m_wndMain(5, 5) {
 	//binding
 	m_viewmodel.attachModel(&m_model);
@@ -13,6 +15,7 @@ GameApp::GameApp() : m_model(5, 5, 4), m_wndMain(5, 5) {
 	
 	//commands
 	m_wndMain.get_StarMapView().attach_PickupCommand(m_viewmodel.getPickupCommand());
+	//m_wndMain.attach_RestartCommand());
 
 	//notifications
 

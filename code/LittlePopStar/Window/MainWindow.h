@@ -16,8 +16,14 @@ public:
 
 	StarMapView& get_StarMapView();
 
+	void attach_RestartCommand(std::function<void()>&& cf);
+
+	static void restart_cb(Fl_Widget* Wp, void* v);
+
 private:
 
+	std::function<void()> m_cmdRestart;
+
 	StarMapView m_starMapView;
-	//Fl_Menu_Bar m_menuBar;
+	Fl_Menu_Bar m_menuBar;
 };

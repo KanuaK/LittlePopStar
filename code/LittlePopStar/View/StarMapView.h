@@ -13,6 +13,7 @@
 #include "../Common/Stars.h"
 
 const int STAR_BUTTON_DIMENSION = 100;	//used to determine the dimension of the StarButton objects in the view
+const int MENU_BAR_HEIGHT = 25;
 
 class StarButton : public Fl_Button {
 public:
@@ -41,6 +42,7 @@ public:
 	std::function<void(int)> getNotification();
 
 	void update();	//updates the view to the values stored in the model. this is the function that should be assigned to StarMapVM.sendNotification
+	int gameOver();
 
 private:
 	void initialize();	//initialize StarMapView, including adding a button widget to the array of children widgets for each star in the model

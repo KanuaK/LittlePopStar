@@ -22,7 +22,7 @@ int ColorMap[colorNum] = { 88, 63, 95, 216, 248, 223, 255, 56 };	//maps the inte
 const std::string assetFolder = { "Assets/" };	//based on the location of main.cpp
 const std::string assetLocations[colorNum] = {"blueStar.png", "greenStar.png", "redStar.png", "yellowStar.png", "purpleStar.png", "orangeStar.png", "pinkStar.png", "whiteStar.png"};
 
-StarMapView::StarMapView(int _rows, int _cols) : m_rows(_rows), m_cols(_cols), Fl_Group(0, 0, _cols * STAR_BUTTON_DIMENSION, _rows* STAR_BUTTON_DIMENSION, 0){
+StarMapView::StarMapView(int _rows, int _cols) : m_rows(_rows), m_cols(_cols), Fl_Group(0, MENU_BAR_HEIGHT, _cols * STAR_BUTTON_DIMENSION, _rows* STAR_BUTTON_DIMENSION, 0){
 	end();
 	std::string location;
 	for (int i = 0; i < colorNum; i++) {
@@ -106,9 +106,21 @@ void StarMapView::update() {
 	return;
 }
 
+int StarMapView::gameOver() {
+	update();
+	Fl_Window gameOverMessage(STAR_BUTTON_DIMENSION*4, STAR_BUTTON_DIMENSION*2, "Game Over");
+	Fl_Box b(0, 0, STAR_BUTTON_DIMENSION * 4, STAR_BUTTON_DIMENSION * 2, "Game Over!");
+	b.labelfont(FL_HELVETICA_BOLD);
+	b.labelsize(20);
+	gameOverMessage.end();
+	gameOverMessage.show();
+	return Fl::run();
+}
+
 std::function<void(int)> StarMapView::getNotification() {
 	return [this](int uID) {
 		if (uID == 0)	this->update();
+		else if (uID == 1)	this->gameOver();
 	};
 }
 
