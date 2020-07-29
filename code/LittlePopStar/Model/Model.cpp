@@ -117,7 +117,7 @@ bool StarMap::popStar() {
 		for (int i = row - 1; i >= 0; i--) {
 			const Star &tmp = starMap.getStar(i, j);
 			if (tmp.getPickup()) {
-				popVec.push_back(tmp);
+				popVec.push_back(std::make_pair(i, j));
 				starMap.setStar(i, j) = emptyStar;
 			}
 			if (tmp.getColor()) {
@@ -189,8 +189,10 @@ Starmat* StarMap::getStarmat() {
 	return &starMap;
 }
 
-const std::vector<Star>& StarMap::getPopVec() {
-	return popVec;
+std::function<std::vector<std::pair<int, int>>* ()> StarMap::getPopVecFunc() {
+	return [this]()->std::vector<std::pair<int, int>>* {
+		return &popVec;
+	};
 }
 
 int* StarMap::getScore() {

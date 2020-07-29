@@ -36,6 +36,6 @@ int* StarMapVM::getScore() {
 	return m_refModel->getScore();
 }
 
-const std::vector<Star>& StarMapVM::getPopVec() {
-	return m_refModel->getPopVec();
+std::function<std::vector<std::pair<int, int>>* ()> StarMapVM::getPopVecFunc() {
+	return m_refModel->getPopVecFunc();
 }

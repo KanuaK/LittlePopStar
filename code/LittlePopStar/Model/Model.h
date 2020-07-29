@@ -18,11 +18,11 @@ public:
 	bool load(const std::string&);
 	//void detachNotification();
 	Starmat* getStarmat();
-	const std::vector<Star>& getPopVec();
+	std::function<std::vector<std::pair<int,int>>*()> getPopVecFunc();
 	int* getScore();
 private:
 	Starmat starMap;
 	int score;
-	std::vector<Star> popVec;
+	std::vector<std::pair<int,int>> popVec;
 	std::function<void(int)> sendNotification;//fire
 };
