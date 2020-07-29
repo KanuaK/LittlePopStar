@@ -21,7 +21,7 @@ GameApp::GameApp() : m_model(5, 5, 4), m_wndMain(5, 5) {
 	//commands
 	m_wndMain.get_StarMapView().attach_PickupCommand(m_viewmodel.getPickupCommand());
 	m_wndMain.attach_RestartCommand(m_viewmodel.getRestartCommand());
-	m_wndMain.attach_LoadCommand(test);
+	m_wndMain.attach_LoadCommand(m_viewmodel.getLoadCommand());
 	m_wndMain.attach_SaveCommand(test);
 
 	//notifications

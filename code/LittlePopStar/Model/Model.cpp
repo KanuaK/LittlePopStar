@@ -20,6 +20,7 @@ void StarMap::initStars() {
 			starMap.setStar(i, j)= Star(rand() % colorNum + 1, false);
 		}
 	score = 0;
+	if (sendNotification != nullptr) sendNotification(0);
 }
 
 
@@ -152,6 +153,7 @@ bool StarMap::load(const std::string& file_name) {
 			return false;
 		}
 		row = _row; col = _col; colorNum = _colorNum;
+		printf("load: %d %d %d\n", row, col, colorNum);
 		starMap = Starmat(row, col);
 		int color;
 		for (int i = 0; i < row; i++) {
@@ -171,6 +173,7 @@ bool StarMap::load(const std::string& file_name) {
 			}
 		}
 		score = 0;
+		if (sendNotification != nullptr) sendNotification(0);
 		return true;
 	}
 	else {

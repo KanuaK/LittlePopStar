@@ -147,6 +147,7 @@
     <ClCompile Include="Common\Stars.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Model\Model.cpp" />
+    <ClCompile Include="ViewModel\Commands\LoadCommand.cpp" />
     <ClCompile Include="ViewModel\Commands\PickupCommand.cpp" />
     <ClCompile Include="ViewModel\Commands\RestartCommand.cpp" />
     <ClCompile Include="ViewModel\ViewModel.cpp" />
