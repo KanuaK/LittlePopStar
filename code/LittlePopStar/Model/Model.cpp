@@ -1,5 +1,7 @@
 #include "Model.h"
 #include <queue>
+#include <iostream>
+#include <fstream>
 
 static const Star emptyStar = Star(0, false);
 
@@ -138,6 +140,42 @@ bool StarMap::popStar() {
 
 void StarMap::attachNotification(std::function<void(int)>&& _notification_func) {
 	sendNotification = std::move(_notification_func);
+}
+
+bool StarMap::load(const std::string& file_name) {
+	std::fstream in(file_name.c_str(), std::ios_base::in);
+	if (in.is_open()) {
+		int _row, _col, _colorNum;
+		in >> _row >> _col >> _colorNum;
+		if (_row == 0 || _col == 0 || _colorNum==0) {
+			in.close();
+			return false;
+		}
+		row = _row; col = _col; colorNum = _colorNum;
+		starMap = Starmat(row, col);
+		int color;
+		for (int i = 0; i < row; i++) {
+			for (int j = 0; j < col; j++) {
+				if (in.eof()) {
+					initStars();
+					throw "Error: Incomplete file!";
+					return false;
+				}
+				in >> color;
+				if (color > colorNum || color <= 0) {
+					throw "Error: Wrong color!";
+					return false;
+				}
+				starMap.setStar(i, j).setColor(color);
+				starMap.setStar(i, j).setPickup(false);
+			}
+		}
+		score = 0;
+		return true;
+	}
+	else {
+		return false;
+	}
 }
 
 /*void StarMap::detachNotification() {

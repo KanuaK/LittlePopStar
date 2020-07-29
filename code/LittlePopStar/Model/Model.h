@@ -2,6 +2,7 @@
 #include "../Common/Stars.h"
 #include <functional>
 #include <memory>
+#include <string>
 class StarMap {
 public:
 	int row, col;
@@ -14,6 +15,7 @@ public:
 	bool checkGameOver(); //check if game is over(No star exists or no star can be eliminated)
 	bool popStar(); //eliminate all stars picked up
 	void attachNotification(std::function<void(int)>&&);
+	bool load(const std::string&);
 	//void detachNotification();
 	Starmat* getStarmat();
 	const std::vector<Star>& getPopVec();
