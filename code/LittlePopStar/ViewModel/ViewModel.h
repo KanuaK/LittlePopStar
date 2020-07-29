@@ -13,7 +13,7 @@ public:
 	std::function<void(int)> getNotification();//void receiveNotification(int);
 	std::function<bool(int, int)> getPickupCommand();
 	std::function<void()> getRestartCommand(); //return a function that will reset the StarMap
-
+	std::function<bool(const std::string&)> getLoadCommand();
 	//properties
 	Starmat* getStarmat();
 	int* getScore();
