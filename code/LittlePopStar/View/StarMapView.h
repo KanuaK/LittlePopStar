@@ -33,6 +33,8 @@ public:
 	//notification that the view should be updated
 	std::function<void(int)> getNotification();
 
+	int gameOverFlag;
+
 private:
 	void initialize();	//initialize StarMapView, including adding a button widget to the array of children widgets for each star in the model
 

@@ -89,26 +89,27 @@ void StarMapView::update() {
 		for (int j = 0; j < m_cols; j++) {
 			currentButton = child(i*m_cols + j);
 			currentStar = &(m_refStarmat->getStar(i, j));
-			if (currentStar->getColor() == 0)	currentButton->image((Fl_Image*)0);
-			else currentButton->image(m_starTextures[((currentStar->getColor()) % 8)*numFrames]);
-			if (!currentStar->getPickup()) {	//if star has not yet been picked up
-				currentButton->box(FL_UP_BOX);
+			if (currentStar->getColor() == 0) {
+				currentButton->image((Fl_Image*)0);
 			}
-			else {	//star has been picked up	
-				//currentButton->color(FL_GRAY);	//set button color to grey
-				//currentButton->label(0);	//remove the star
+			else {
+				currentButton->image(m_starTextures[((currentStar->getColor()) % 8) * numFrames]);
+			}
+			if (!currentStar->getPickup()) {
+				currentButton->box(FL_UP_BOX);//if star has not yet been picked up
+			}
+			else {
 				currentButton->box(FL_DOWN_BOX);
 			}
-			//std::cout << currentButton->box();
 		}
 	}
 	redraw();
-	activate();
+	if (gameOverFlag == 1)	gameOverFlag = 0;
+	else activate();
 	return;
 }
 
 int StarMapView::gameOver(int score) {
-	update();
 	deactivate();
 	std::string labelText = "Game Over!\nScore: ";
 	labelText += std::to_string(score);
@@ -134,7 +135,11 @@ std::function<void(int)> StarMapView::getNotification() {
 			if(m_popVec!=nullptr && this->m_popVec->size()!=0)	Fl::add_timeout(0, this->popAnimation, (void*)this);
 			else	this->update();
 		}
-		else this->gameOver(uID);
+		else {
+			gameOverFlag = 1;
+			if(m_popVec!=nullptr && this->m_popVec->size()!=0)	Fl::add_timeout(0, this->popAnimation, (void*)this);
+			gameOver(uID);
+		}
 	};
 }
 
