@@ -117,7 +117,7 @@ bool StarMap::popStar() {
 		for (int i = row - 1; i >= 0; i--) {
 			const Star &tmp = starMap.getStar(i, j);
 			if (tmp.getPickup()) {
-				popVec.push_back(std::make_pair(i, j));
+				popVec.push_back(std::make_pair(i * col + j, tmp.getColor()));
 				starMap.setStar(i, j) = emptyStar;
 			}
 			if (tmp.getColor()) {
