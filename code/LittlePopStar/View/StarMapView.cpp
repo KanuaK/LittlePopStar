@@ -21,18 +21,22 @@ const int colorNum = 8;
 int ColorMap[colorNum] = { 88, 63, 95, 216, 248, 223, 255, 56 };	//maps the integer values stored in the star objects of the model to default FLTK colour values
 //red, green, yellow, blue, magenta, cyan, white, black
 const std::string assetFolder = { "Assets/" };	//based on the location of main.cpp
-const std::string assetLocations[colorNum] = {"blueStar.png", "greenStar.png", "redStar.png", "yellowStar.png", "purpleStar.png", "orangeStar.png", "pinkStar.png", "whiteStar.png"};
+const std::string colors[colorNum] = { "blue", "green", "red", "yellow", "purple", "orange", "pink", "white" };
+const std::string assetSuffix[numFrames] = {"Star.png", "Breaking1.png", "Breaking2.png", "Breaking3.png", "Breaking4.png", "Breaking5.png", "Broken.png"};
 
 StarMapView::StarMapView(int _rows, int _cols) : m_rows(_rows), m_cols(_cols), Fl_Group(0, MENU_BAR_HEIGHT, _cols * STAR_BUTTON_DIMENSION, _rows* STAR_BUTTON_DIMENSION, 0){
 	end();
 	std::string location;
 	for (int i = 0; i < colorNum; i++) {
-		location = assetFolder + assetLocations[i];
-		//std::cout << location << std::endl;
-		Fl_PNG_Image fullSizeTexture(location.c_str());
-		m_starTextures.push_back(fullSizeTexture.copy(STAR_BUTTON_DIMENSION*3/4, STAR_BUTTON_DIMENSION*3/4));
+		for (int j = 0; j < numFrames; j++) {
+			location = assetFolder + colors[i] + assetSuffix[j];
+			//std::cout << location << std::endl;
+			Fl_PNG_Image fullSizeTexture(location.c_str());
+			m_starTextures.push_back(fullSizeTexture.copy(STAR_BUTTON_DIMENSION * 3 / 4, STAR_BUTTON_DIMENSION * 3 / 4));
+		}
 	}
 	initialize();
+	deactivate();
 }
 
 StarMapView::~StarMapView() {
@@ -75,7 +79,6 @@ void StarMapView::initialize() {
 		}
 	}
 	if (children() != m_rows * m_cols)	throw "Initialization Failed";
-	return;
 }
 
 void StarMapView::update() {
@@ -87,7 +90,7 @@ void StarMapView::update() {
 			currentButton = child(i*m_cols + j);
 			currentStar = &(m_refStarmat->getStar(i, j));
 			if (currentStar->getColor() == 0)	currentButton->image((Fl_Image*)0);
-			else currentButton->image(m_starTextures[(currentStar->getColor()) % 8]);
+			else currentButton->image(m_starTextures[((currentStar->getColor()) % 8)*numFrames]);
 			if (!currentStar->getPickup()) {	//if star has not yet been picked up
 				currentButton->box(FL_UP_BOX);
 			}
@@ -129,7 +132,7 @@ std::function<void(int)> StarMapView::getNotification() {
 			if(m_popVec!=nullptr && this->m_popVec->size()!=0)	Fl::add_timeout(0, this->popAnimation, (void*)this);
 			else	this->update();
 		}
-		else if (uID == 1)	this->gameOver();
+		else this->gameOver();
 	};
 }
 
@@ -138,12 +141,12 @@ void StarMapView::popAnimation(void* v) {
 	StarMapView* smv = (StarMapView*)v;
 	std::vector<std::pair<int, int>>* popVector = smv->m_popVec;
 	if (++currentFrame < numFrames) {
-		Fl::repeat_timeout(0.25, popAnimation, v);
+		Fl::repeat_timeout(0.1, popAnimation, v);
 		int pos, clr;
 		for (unsigned int i = 0; i < popVector->size(); i++) {
 			pos = (*popVector)[i].first;
-			clr = (*popVector)[i].second;
-			smv->child(pos)->image(smv->m_starTextures[currentFrame]);
+			clr = (*popVector)[i].second % 8;
+			smv->child(pos)->image(smv->m_starTextures[clr*numFrames+currentFrame]);
 		}
 		smv->redraw();
 	}
