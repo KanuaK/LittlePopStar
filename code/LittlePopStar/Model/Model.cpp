@@ -177,8 +177,30 @@ bool StarMap::load(const std::string& file_name) {
 				starMap.setStar(i, j).setPickup(false);
 			}
 		}
-		score = 0;
+		if (in.eof()) score = 0;
+		else in >> score;
+		in.close();
 		if (sendNotification != nullptr) sendNotification(-1);
+		return true;
+	}
+	else {
+		return false;
+	}
+}
+
+
+bool StarMap::save(const std::string& file_name) {
+	std::fstream out(file_name.c_str(), std::ios_base::out);
+	if (out.is_open()) {
+		out << row << " " << col << " " << colorNum << std::endl;
+		printf("save: %d %d %d\n", row, col, colorNum);
+		for (int i = 0; i < row; i++,out<<std::endl) {
+			for (int j = 0; j < col; j++) {
+				out << starMap.getStar(i, j).getColor()<<" ";
+			}
+		}
+		out << score << std::endl;
+		out.close();
 		return true;
 	}
 	else {

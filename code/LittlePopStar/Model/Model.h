@@ -16,6 +16,7 @@ public:
 	bool popStar(); //eliminate all stars picked up
 	void attachNotification(std::function<void(int)>&&);
 	bool load(const std::string&);
+	bool save(const std::string&);
 	//void detachNotification();
 	std::function<Starmat* ()> getStarmatFunc();
 	std::function<std::vector<std::pair<int,int>>*()> getPopVecFunc();
