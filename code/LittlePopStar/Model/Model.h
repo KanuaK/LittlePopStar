@@ -17,7 +17,7 @@ public:
 	void attachNotification(std::function<void(int)>&&);
 	bool load(const std::string&);
 	//void detachNotification();
-	Starmat* getStarmat();
+	std::function<Starmat* ()> getStarmatFunc();
 	std::function<std::vector<std::pair<int,int>>*()> getPopVecFunc();
 	int* getScore();
 private:

@@ -15,7 +15,7 @@ public:
 	std::function<void()> getRestartCommand(); //return a function that will reset the StarMap
 	std::function<bool(const std::string&)> getLoadCommand();
 	//properties
-	Starmat* getStarmat();
+	std::function<Starmat* ()> getStarmatFunc();
 	int* getScore();
 	std::function<std::vector<std::pair<int, int>>* ()> getPopVecFunc();
 private:

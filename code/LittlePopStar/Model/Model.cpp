@@ -4,23 +4,21 @@
 #include <fstream>
 
 static const Star emptyStar = Star(0, false);
+static const int bonusScore[] = { 50,40,30,25,20,15,12,9,6,3,1 };
 
 StarMap::StarMap(int _row, int _col,unsigned int _colorNum) :starMap(_row, _col),row(_row),col(_col),colorNum(_colorNum) {
 	initStars();
 	//puts("StarMap construct"); system("pause");
-	sendNotification = [](int x) {
-		puts("initialize notification");
-		return x;
-	};
 }
 
 void StarMap::initStars() {
+	starMap = Starmat(row, col);
 	for (int i = 0; i < row; i++) 
 		for (int j = 0; j < col; j++) {
 			starMap.setStar(i, j)= Star(rand() % colorNum + 1, false);
 		}
-	score = 1;
-	if (sendNotification != nullptr) sendNotification(0);
+	score = 0;
+	if (sendNotification != nullptr) sendNotification(-1);
 }
 
 
@@ -89,7 +87,7 @@ void StarMap::pickdownStar() {
 }
 
 bool StarMap::checkGameOver() {
-	for(int i=0;i<row;i++)
+	for (int i = 0; i < row; i++)
 		for (int j = 0; j < col; j++) {
 			unsigned int col = starMap.getStar(i, j).getColor();
 			if (col == 0) continue;
@@ -133,7 +131,14 @@ bool StarMap::popStar() {
 	for (; l < col; l++)
 		for (int i = 0; i < row; i++)
 			starMap.setStar(i, l) = emptyStar;
-	if (checkGameOver()) sendNotification(score);
+	if (checkGameOver()) {
+		int cnt = 0;
+		for (int i = 0; i < row; i++)
+			for (int j = 0; j < col; j++)
+				if (starMap.getStar(i, j).getColor()) cnt++;
+		if (cnt > 10) cnt = 10;
+		sendNotification(score+bonusScore[cnt]);
+	}
 	sendNotification(0);
 	//popVec.clear();
 	return true;
@@ -172,8 +177,8 @@ bool StarMap::load(const std::string& file_name) {
 				starMap.setStar(i, j).setPickup(false);
 			}
 		}
-		score = 1;
-		if (sendNotification != nullptr) sendNotification(0);
+		score = 0;
+		if (sendNotification != nullptr) sendNotification(-1);
 		return true;
 	}
 	else {
@@ -185,8 +190,10 @@ bool StarMap::load(const std::string& file_name) {
 	sendNotification = std::function<void(int)>();
 }*/
 
-Starmat* StarMap::getStarmat() {
-	return &starMap;
+std::function<Starmat* ()> StarMap::getStarmatFunc() {
+	return [this]()->Starmat* {
+		return &starMap;
+	};
 }
 
 std::function<std::vector<std::pair<int, int>>* ()> StarMap::getPopVecFunc() {

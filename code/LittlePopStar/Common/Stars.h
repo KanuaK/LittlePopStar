@@ -1,6 +1,5 @@
 #pragma once
 #include <vector>
-#include "FL/Fl_Color_Chooser.H"
 
 class Star {
 public:
