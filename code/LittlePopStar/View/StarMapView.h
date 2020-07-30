@@ -17,7 +17,6 @@ const int STAR_BUTTON_DIMENSION = 100;	//used to determine the dimension of the 
 const int MENU_BAR_HEIGHT = 25;
 
 class StarMapView : public Fl_Group{
-//	friend static void popAnimation(void* v);
 public:
 	//constructor, destructor, default generated functions
 	StarMapView(int _rows, int _cols);
