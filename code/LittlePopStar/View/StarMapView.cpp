@@ -16,6 +16,7 @@
 #include "../Common/Stars.h"
 #include <iostream>
 
+const int numFrames = 7;
 const int colorNum = 8;
 int ColorMap[colorNum] = { 88, 63, 95, 216, 248, 223, 255, 56 };	//maps the integer values stored in the star objects of the model to default FLTK colour values
 //red, green, yellow, blue, magenta, cyan, white, black
@@ -35,7 +36,7 @@ StarMapView::StarMapView(int _rows, int _cols) : m_rows(_rows), m_cols(_cols), F
 }
 
 StarMapView::~StarMapView() {
-	for (int i = 0; i < m_starTextures.size(); i++)	delete(m_starTextures[i]);
+	for (unsigned int i = 0; i < m_starTextures.size(); i++)	delete(m_starTextures[i]);
 	return;
 }
 
@@ -43,16 +44,12 @@ void StarMapView::attachStarmat(Starmat* _refStarmat) {
 	m_refStarmat = _refStarmat;
 }
 
-//std::shared_ptr<StarMap> StarMapView::detachModel() {
-//	return std::shared_ptr<StarMap>(std::move(m_refModel));
-//}
+void StarMapView::attachPopVecFunct(std::function<std::vector<std::pair<int, int>>* ()>&& f) {
+	m_getPopVecFunct = std::move(f);
+}
 
 void StarMapView::attach_PickupCommand(std::function<bool(int, int)>&& cf) {
 	m_cmdPickup = std::move(cf);
-}
-
-std::function<bool(int, int)> StarMapView::detach_PickupCommand() {
-	return std::function<bool(int, int)>(std::move(m_cmdPickup));
 }
 
 void StarMapView::pickup_cb(Fl_Widget* Bp, void* v)
@@ -103,11 +100,13 @@ void StarMapView::update() {
 		}
 	}
 	redraw();
+	activate();
 	return;
 }
 
 int StarMapView::gameOver() {
 	update();
+	deactivate();
 	Fl_Window gameOverMessage(STAR_BUTTON_DIMENSION*4, STAR_BUTTON_DIMENSION*2, "Game Over");
 	Fl_Box b(0, 0, STAR_BUTTON_DIMENSION * 4, STAR_BUTTON_DIMENSION * 2, "Game Over!");
 	b.labelfont(FL_HELVETICA_BOLD);
@@ -117,19 +116,38 @@ int StarMapView::gameOver() {
 	return Fl::run();
 }
 
+void StarMapView::getPopVec() {
+	m_popVec = m_getPopVecFunct();
+}
+
 std::function<void(int)> StarMapView::getNotification() {
+	getPopVec();
+	deactivate();
 	return [this](int uID) {
-		if (uID == 0)	this->update();
+		if (uID == 0) {
+			if(this->m_popVec->size()!=0)	Fl::add_timeout(0, this->popAnimation, (void*)this);
+			else	this->update();
+		}
 		else if (uID == 1)	this->gameOver();
 	};
 }
 
-StarButton::StarButton(	int _row, int _col) : m_row(_row), m_col(_col),
-						Fl_Button(_row* STAR_BUTTON_DIMENSION, _col* STAR_BUTTON_DIMENSION, STAR_BUTTON_DIMENSION, STAR_BUTTON_DIMENSION, "*") {
-	type(1);
-}
-//does not set callback at construction
-
-StarButton::~StarButton() {
-	return;
+void StarMapView::popAnimation(void* v) {
+	static int currentFrame = 0;
+	StarMapView* smv = (StarMapView*)v;
+	std::vector<std::pair<int, int>>* popVector = smv->m_popVec;
+	if (++currentFrame < numFrames) {
+		Fl::repeat_timeout(0.25, popAnimation, v);
+		int pos, clr;
+		for (unsigned int i = 0; i < popVector->size(); i++) {
+			pos = (*popVector)[i].first;
+			clr = (*popVector)[i].second;
+			smv->child(pos)->image(smv->m_starTextures[currentFrame]);
+		}
+		smv->redraw();
+	}
+	else {
+		currentFrame = 0;
+		smv->update();
+	}
 }
