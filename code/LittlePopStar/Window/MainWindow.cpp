@@ -10,12 +10,11 @@
 
 #include <functional>
 
-MainWindow::MainWindow(int _rows, int _cols) :	Fl_Window(_cols * STAR_BUTTON_DIMENSION, _rows* STAR_BUTTON_DIMENSION + MENU_BAR_HEIGHT, "LittlePopStar"), m_menuBar(0, 0, _cols* STAR_BUTTON_DIMENSION, MENU_BAR_HEIGHT, "Menu"){
+MainWindow::MainWindow(int _rows, int _cols) :	Fl_Window(_cols * STAR_BUTTON_DIMENSION, _rows* STAR_BUTTON_DIMENSION + MENU_BAR_HEIGHT, "LittlePopStar"), m_starMapView(_rows, _cols), m_menuBar(0, 0, _cols* STAR_BUTTON_DIMENSION, MENU_BAR_HEIGHT, "Menu"){
 	end();
 	m_menuBar.add("New Game", 0, (Fl_Callback*) &restart_cb, &m_cmdRestart);
 	m_menuBar.add("Load", 0, (Fl_Callback*)&load_cb, &m_cmdLoad);
 //	m_menuBar.add("Save", 0, (Fl_Callback*)&save_cb, &m_cmdSave);
-	m_starMapView = new StarMapView(_rows, _cols);
 	m_viewModel = 0;
 	resizable(m_starMapView);
 }
@@ -24,7 +23,7 @@ MainWindow::~MainWindow() {
 	return;
 }
 
-StarMapView* MainWindow::get_StarMapView() {
+StarMapView& MainWindow::get_StarMapView() {
 	return m_starMapView;
 }
 
@@ -85,21 +84,20 @@ void MainWindow::save_cb(Fl_Widget*, void* v)
 }
 
 void MainWindow::getStarmat() {
-	m_starMapView->attachStarmat(m_viewModel->getStarmat());
+	m_starMapView.attachStarmat(m_viewModel->getStarmat());
 }
 
 std::function<void(int)> MainWindow::getNotification() {
 	return [this](int uID) {
 		if (uID < 0) {
-			this->w(m_viewModel->getCol()*STAR_BUTTON_DIMENSION+MENU_BAR_HEIGHT);
-			this->h(m_viewModel->getRow() * STAR_BUTTON_DIMENSION);
-			delete(m_starMapView);
-			m_starMapView = new StarMapView(m_viewModel->getRow(), m_viewModel->getCol());
+			int rows = m_viewModel->getRow();
+			int cols = m_viewModel->getCol();
+			this->w(cols * STAR_BUTTON_DIMENSION + MENU_BAR_HEIGHT);
+			this->h(rows * STAR_BUTTON_DIMENSION);
+			m_starMapView.resize(rows, cols);
 			this->getStarmat();
-			m_starMapView->updateDriver(uID);
+			redraw();
 		}
-		else {
-			m_starMapView->updateDriver(uID);
-		}
+		m_starMapView.updateDriver(uID);
 	};
 }

@@ -36,6 +36,7 @@ StarMapView::StarMapView(int _rows, int _cols) : m_rows(_rows), m_cols(_cols), F
 			m_starTextures.push_back(fullSizeTexture.copy(STAR_BUTTON_DIMENSION * 3 / 4, STAR_BUTTON_DIMENSION * 3 / 4));
 		}
 	}
+	gameOverFlag = 0;
 	initialize();
 	deactivate();
 }
@@ -80,6 +81,18 @@ void StarMapView::initialize() {
 		}
 	}
 	if (children() != m_rows * m_cols)	throw "Initialization Failed";
+	std::cout << children() << "hi";
+}
+
+void StarMapView::resize(int _rows, int _cols) {
+	if (m_rows != _rows || m_cols != _cols) {
+		m_rows = _rows;
+		m_cols = _cols;
+		w(_cols * STAR_BUTTON_DIMENSION);
+		h(_cols * STAR_BUTTON_DIMENSION + MENU_BAR_HEIGHT);
+		clear();
+		initialize();
+	}
 }
 
 void StarMapView::update() {
@@ -105,6 +118,7 @@ void StarMapView::update() {
 		}
 	}
 	redraw();
+	std::cout << std::endl << "should update here"<<std::endl;
 	if (gameOverFlag == 1)	gameOverFlag = 0;
 	else activate();
 	return;
@@ -129,11 +143,15 @@ void StarMapView::getPopVec() {
 }
 
 void StarMapView::updateDriver(int uID) {
+	std::cout << "inside update driver" <<uID<< std::endl;
 	if (uID <= 0) {
 		getPopVec();
 		deactivate();
 		if(m_popVec!=nullptr && this->m_popVec->size()!=0)	Fl::add_timeout(0, this->popAnimation, (void*)this);
-		else	this->update();
+		else {
+			this->update();
+			std::cout << "herere";
+		}
 	}
 	else {
 		gameOverFlag = 1;

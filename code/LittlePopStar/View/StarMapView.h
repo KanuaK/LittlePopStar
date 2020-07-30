@@ -32,6 +32,8 @@ public:
 	//notification that the view should be updated
 	void updateDriver(int uID);
 
+	void resize(int _rows, int _cols);
+
 	int gameOverFlag;
 
 private:
@@ -57,7 +59,7 @@ private:
 	std::vector<std::pair<int, int>>* m_popVec;
 
 	//game instance dimensions
-	const int m_rows, m_cols;
+	int m_rows, m_cols;
 
 	//common level starmat. contains information of the current game state
 	Starmat* m_refStarmat;
