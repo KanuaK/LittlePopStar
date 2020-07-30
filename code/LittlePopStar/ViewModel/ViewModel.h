@@ -14,6 +14,7 @@ public:
 	std::function<bool(int, int)> getPickupCommand();
 	std::function<void()> getRestartCommand(); //return a function that will reset the StarMap
 	std::function<bool(const std::string&)> getLoadCommand();
+	std::function<bool(const std::string&)> getSaveCommand();
 	//properties
 	std::function<Starmat* ()> getStarmatFunc();
 	Starmat* getStarmat();
