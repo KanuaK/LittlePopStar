@@ -16,10 +16,11 @@ GameApp::GameApp() : m_model(5, 5, 4), m_wndMain(5, 5) {
 	m_viewmodel.attachNotification(m_wndMain.get_StarMapView().getNotification());
 	//properties
 	m_wndMain.get_StarMapView().attachStarmat(m_model.getStarmat());
-	m_wndMain.get_StarMapView().update();
+	//m_wndMain.get_StarMapView().update();
 	
 	//commands
 	m_wndMain.get_StarMapView().attach_PickupCommand(m_viewmodel.getPickupCommand());
+	m_wndMain.get_StarMapView().attachPopVecFunct(m_viewmodel.getPopVecFunc());
 	m_wndMain.attach_RestartCommand(m_viewmodel.getRestartCommand());
 	m_wndMain.attach_LoadCommand(m_viewmodel.getLoadCommand());
 	m_wndMain.attach_SaveCommand(test);

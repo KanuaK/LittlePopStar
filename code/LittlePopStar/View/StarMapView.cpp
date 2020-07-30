@@ -117,7 +117,8 @@ int StarMapView::gameOver() {
 }
 
 void StarMapView::getPopVec() {
-	m_popVec = m_getPopVecFunct();
+	if(m_getPopVecFunct!=nullptr)
+		m_popVec = m_getPopVecFunct();
 }
 
 std::function<void(int)> StarMapView::getNotification() {
@@ -125,7 +126,7 @@ std::function<void(int)> StarMapView::getNotification() {
 	deactivate();
 	return [this](int uID) {
 		if (uID == 0) {
-			if(this->m_popVec->size()!=0)	Fl::add_timeout(0, this->popAnimation, (void*)this);
+			if(m_popVec!=nullptr && this->m_popVec->size()!=0)	Fl::add_timeout(0, this->popAnimation, (void*)this);
 			else	this->update();
 		}
 		else if (uID == 1)	this->gameOver();
