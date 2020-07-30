@@ -36,6 +36,16 @@ int* StarMapVM::getScore() {
 	return m_refModel->getScore();
 }
 
+int StarMapVM::getRow() {
+	if (m_refModel != nullptr) return m_refModel->row;
+	return 0;
+}
+
+int StarMapVM::getCol() {
+	if (m_refModel != nullptr) return m_refModel->col;
+	return 0;
+}
+
 std::function<std::vector<std::pair<int, int>>* ()> StarMapVM::getPopVecFunc() {
 	return m_refModel->getPopVecFunc();
 }
