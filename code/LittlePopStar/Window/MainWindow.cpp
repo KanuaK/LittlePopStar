@@ -12,7 +12,7 @@
 MainWindow::MainWindow(int _rows, int _cols) :	Fl_Window(_cols * STAR_BUTTON_DIMENSION, _rows* STAR_BUTTON_DIMENSION + MENU_BAR_HEIGHT, "LittlePopStar"),
 												m_starMapView(_rows, _cols), m_menuBar(0, 0, _cols* STAR_BUTTON_DIMENSION, MENU_BAR_HEIGHT, "Menu"){
 	end();
-	m_menuBar.add("Restart", 0, (Fl_Callback*) &restart_cb, &m_cmdRestart);
+	m_menuBar.add("New Game", 0, (Fl_Callback*) &restart_cb, &m_cmdRestart);
 	m_menuBar.add("Load", 0, (Fl_Callback*)&load_cb, &m_cmdLoad);
 	m_menuBar.add("Save", 0, (Fl_Callback*)&save_cb, &m_cmdSave);
 	resizable(m_starMapView);
