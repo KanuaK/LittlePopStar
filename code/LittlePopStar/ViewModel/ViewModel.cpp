@@ -32,8 +32,14 @@ std::function<Starmat* ()> StarMapVM::getStarmatFunc() {
 	return m_refModel->getStarmatFunc();
 }
 
+Starmat* StarMapVM::getStarmat() {
+	if (m_refModel != nullptr) return m_refModel->getStarmat(); 
+	return nullptr;
+}
+
 int* StarMapVM::getScore() {
-	return m_refModel->getScore();
+	if (m_refModel != nullptr) return m_refModel->getScore();
+	return 0;
 }
 
 int StarMapVM::getRow() {

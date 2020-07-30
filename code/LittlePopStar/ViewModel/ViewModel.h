@@ -16,6 +16,7 @@ public:
 	std::function<bool(const std::string&)> getLoadCommand();
 	//properties
 	std::function<Starmat* ()> getStarmatFunc();
+	Starmat* getStarmat();
 	int* getScore();
 	int getRow();
 	int getCol();

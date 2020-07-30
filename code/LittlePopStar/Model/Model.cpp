@@ -205,3 +205,7 @@ std::function<std::vector<std::pair<int, int>>* ()> StarMap::getPopVecFunc() {
 int* StarMap::getScore() {
 	return &score;
 }
+
+Starmat* StarMap::getStarmat() {
+	return &starMap;
+}

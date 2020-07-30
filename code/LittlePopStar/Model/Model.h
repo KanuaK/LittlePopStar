@@ -20,6 +20,7 @@ public:
 	std::function<Starmat* ()> getStarmatFunc();
 	std::function<std::vector<std::pair<int,int>>*()> getPopVecFunc();
 	int* getScore();
+	Starmat* getStarmat();
 private:
 	Starmat starMap;
 	int score;
