@@ -39,7 +39,7 @@ private:
 	//functions called by update driver declared in get notification, depending on status
 	static void popAnimation(void* v);
 	void update();
-	int gameOver();
+	int gameOver(int score);
 	void getPopVec();	//updates pop vector
 	
 	//button callback handler

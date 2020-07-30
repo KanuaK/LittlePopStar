@@ -107,11 +107,13 @@ void StarMapView::update() {
 	return;
 }
 
-int StarMapView::gameOver() {
+int StarMapView::gameOver(int score) {
 	update();
 	deactivate();
-	Fl_Window gameOverMessage(STAR_BUTTON_DIMENSION*4, STAR_BUTTON_DIMENSION*2, "Game Over");
-	Fl_Box b(0, 0, STAR_BUTTON_DIMENSION * 4, STAR_BUTTON_DIMENSION * 2, "Game Over!");
+	std::string labelText = "Game Over!\nScore: ";
+	labelText += std::to_string(score);
+	Fl_Window gameOverMessage(STAR_BUTTON_DIMENSION*4, STAR_BUTTON_DIMENSION*2, "Game Over!");
+	Fl_Box b(0, 0, STAR_BUTTON_DIMENSION * 4, STAR_BUTTON_DIMENSION * 2, labelText.c_str());
 	b.labelfont(FL_HELVETICA_BOLD);
 	b.labelsize(20);
 	gameOverMessage.end();
@@ -132,7 +134,7 @@ std::function<void(int)> StarMapView::getNotification() {
 			if(m_popVec!=nullptr && this->m_popVec->size()!=0)	Fl::add_timeout(0, this->popAnimation, (void*)this);
 			else	this->update();
 		}
-		else this->gameOver();
+		else this->gameOver(uID);
 	};
 }
 

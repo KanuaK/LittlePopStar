@@ -19,7 +19,7 @@ void StarMap::initStars() {
 		for (int j = 0; j < col; j++) {
 			starMap.setStar(i, j)= Star(rand() % colorNum + 1, false);
 		}
-	score = 0;
+	score = 1;
 	if (sendNotification != nullptr) sendNotification(0);
 }
 
@@ -133,7 +133,7 @@ bool StarMap::popStar() {
 	for (; l < col; l++)
 		for (int i = 0; i < row; i++)
 			starMap.setStar(i, l) = emptyStar;
-	if (checkGameOver()) sendNotification(1);
+	if (checkGameOver()) sendNotification(score);
 	sendNotification(0);
 	//popVec.clear();
 	return true;
@@ -172,7 +172,7 @@ bool StarMap::load(const std::string& file_name) {
 				starMap.setStar(i, j).setPickup(false);
 			}
 		}
-		score = 0;
+		score = 1;
 		if (sendNotification != nullptr) sendNotification(0);
 		return true;
 	}
