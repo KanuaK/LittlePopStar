@@ -110,7 +110,6 @@ bool StarMap::popStar() {
 		return true;
 	}
 	score += cnt * (cnt + 1) / 2;
-	popVec.clear();
 	int l = 0;
 	for (int j = 0; j < col; j++) {
 		int k = row-1;
@@ -136,6 +135,7 @@ bool StarMap::popStar() {
 			starMap.setStar(i, l) = emptyStar;
 	if (checkGameOver()) sendNotification(1);
 	sendNotification(0);
+	//popVec.clear();
 	return true;
 }
 

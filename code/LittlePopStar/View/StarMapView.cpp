@@ -122,10 +122,10 @@ void StarMapView::getPopVec() {
 }
 
 std::function<void(int)> StarMapView::getNotification() {
-	getPopVec();
-	deactivate();
 	return [this](int uID) {
 		if (uID == 0) {
+			getPopVec();
+			deactivate();
 			if(m_popVec!=nullptr && this->m_popVec->size()!=0)	Fl::add_timeout(0, this->popAnimation, (void*)this);
 			else	this->update();
 		}
@@ -148,6 +148,7 @@ void StarMapView::popAnimation(void* v) {
 		smv->redraw();
 	}
 	else {
+		popVector->clear();
 		currentFrame = 0;
 		smv->update();
 	}
