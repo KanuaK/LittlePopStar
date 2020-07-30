@@ -30,7 +30,7 @@ public:
 	void attach_PickupCommand(std::function<bool(int, int)>&& cf);
 
 	//notification that the view should be updated
-	std::function<void(int)> getNotification();
+	void updateDriver(int uID);
 
 	int gameOverFlag;
 

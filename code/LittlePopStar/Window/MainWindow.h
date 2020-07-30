@@ -6,6 +6,7 @@
 
 #include <string>
 
+#include "../ViewModel/ViewModel.h"
 #include "../View/StarMapView.h"
 
 class MainWindow : public Fl_Window {
@@ -16,15 +17,22 @@ public:
 	MainWindow& operator=(const MainWindow&) = delete;
 	~MainWindow();
 
-	StarMapView& get_StarMapView();
+	StarMapView* get_StarMapView();
 
 	void attach_RestartCommand(std::function<void()>&& cf);
 	void attach_LoadCommand(std::function<bool(const std::string&)>&& cf);
 	void attach_SaveCommand(std::function<bool(const std::string&)>&& cf);
 
+	void attach_viewModel(StarMapVM*);
+
+	std::function<void(int)> getNotification();
+
 	static void restart_cb(Fl_Widget* Wp, void* v);
 	static void load_cb(Fl_Widget* Wp, void* v);
 	static void save_cb(Fl_Widget* Wp, void* v);
+
+	void getStarmat();
+
 
 private:
 
@@ -32,6 +40,8 @@ private:
 	std::function<bool(const std::string&)> m_cmdLoad;
 	std::function<bool(const std::string&)> m_cmdSave;
 
-	StarMapView m_starMapView;
+	StarMapView* m_starMapView;
 	Fl_Menu_Bar m_menuBar;
+
+	StarMapVM* m_viewModel;
 };

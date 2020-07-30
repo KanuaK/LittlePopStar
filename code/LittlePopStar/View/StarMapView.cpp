@@ -5,6 +5,7 @@
 #include <FL/Fl_Image.H>
 #include <FL/Fl_PNG_Image.H>
 #include <FL/Fl_draw.H>
+#include <FL/Fl_Box.H>
 
 #include <functional>
 #include <memory>
@@ -127,20 +128,18 @@ void StarMapView::getPopVec() {
 		m_popVec = m_getPopVecFunct();
 }
 
-std::function<void(int)> StarMapView::getNotification() {
-	return [this](int uID) {
-		if (uID == 0) {
-			getPopVec();
-			deactivate();
-			if(m_popVec!=nullptr && this->m_popVec->size()!=0)	Fl::add_timeout(0, this->popAnimation, (void*)this);
-			else	this->update();
-		}
-		else {
-			gameOverFlag = 1;
-			if(m_popVec!=nullptr && this->m_popVec->size()!=0)	Fl::add_timeout(0, this->popAnimation, (void*)this);
-			gameOver(uID);
-		}
-	};
+void StarMapView::updateDriver(int uID) {
+	if (uID <= 0) {
+		getPopVec();
+		deactivate();
+		if(m_popVec!=nullptr && this->m_popVec->size()!=0)	Fl::add_timeout(0, this->popAnimation, (void*)this);
+		else	this->update();
+	}
+	else {
+		gameOverFlag = 1;
+		if(m_popVec!=nullptr && this->m_popVec->size()!=0)	Fl::add_timeout(0, this->popAnimation, (void*)this);
+		gameOver(uID);
+	}
 }
 
 void StarMapView::popAnimation(void* v) {
