@@ -169,7 +169,7 @@ bool StarMap::load(const std::string& file_name) {
 					return false;
 				}
 				in >> color;
-				if (color > colorNum || color <= 0) {
+				if (color > colorNum || color < 0) {
 					throw "Error: Wrong color!";
 					return false;
 				}
