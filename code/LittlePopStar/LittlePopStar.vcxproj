@@ -150,6 +150,7 @@
     <ClCompile Include="ViewModel\Commands\LoadCommand.cpp" />
     <ClCompile Include="ViewModel\Commands\PickupCommand.cpp" />
     <ClCompile Include="ViewModel\Commands\RestartCommand.cpp" />
+    <ClCompile Include="ViewModel\Commands\SaveCommand.cpp" />
     <ClCompile Include="ViewModel\ViewModel.cpp" />
     <ClCompile Include="View\StarMapView.cpp" />
     <ClCompile Include="Window\MainWindow.cpp" />

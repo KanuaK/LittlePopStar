@@ -66,6 +66,9 @@
     <ClCompile Include="ViewModel\Commands\LoadCommand.cpp">
       <Filter>源文件\ViewModel\Commands</Filter>
     </ClCompile>
+    <ClCompile Include="ViewModel\Commands\SaveCommand.cpp">
+      <Filter>源文件\ViewModel\Commands</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Common\Stars.h">
