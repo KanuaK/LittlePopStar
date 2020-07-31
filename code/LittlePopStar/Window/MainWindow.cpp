@@ -92,11 +92,10 @@ std::function<void(int)> MainWindow::getNotification() {
 		if (uID < 0) {
 			int rows = m_viewModel->getRow();
 			int cols = m_viewModel->getCol();
-			this->w(cols * STAR_BUTTON_DIMENSION + MENU_BAR_HEIGHT);
-			this->h(rows * STAR_BUTTON_DIMENSION);
-			m_starMapView.resize(rows, cols);
+			this->size(cols * STAR_BUTTON_DIMENSION, rows * STAR_BUTTON_DIMENSION + MENU_BAR_HEIGHT);
+			m_starMapView.reinitialize(rows, cols);
 			this->getStarmat();
-			redraw();
+//			redraw();
 		}
 		m_starMapView.updateDriver(uID);
 	};

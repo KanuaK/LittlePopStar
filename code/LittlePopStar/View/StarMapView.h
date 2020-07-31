@@ -32,7 +32,7 @@ public:
 	//notification that the view should be updated
 	void updateDriver(int uID);
 
-	void resize(int _rows, int _cols);
+	void reinitialize(int _rows, int _cols);
 
 	int gameOverFlag;
 

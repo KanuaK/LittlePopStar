@@ -84,12 +84,11 @@ void StarMapView::initialize() {
 	std::cout << children() << "hi";
 }
 
-void StarMapView::resize(int _rows, int _cols) {
+void StarMapView::reinitialize(int _rows, int _cols) {
 	if (m_rows != _rows || m_cols != _cols) {
 		m_rows = _rows;
 		m_cols = _cols;
-		w(_cols * STAR_BUTTON_DIMENSION);
-		h(_cols * STAR_BUTTON_DIMENSION + MENU_BAR_HEIGHT);
+		size(m_cols * STAR_BUTTON_DIMENSION, m_rows * STAR_BUTTON_DIMENSION + MENU_BAR_HEIGHT);
 		clear();
 		initialize();
 	}
