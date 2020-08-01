@@ -15,7 +15,8 @@ MainWindow::MainWindow(int _rows, int _cols) :	Fl_Window(_cols * STAR_BUTTON_DIM
 	m_menuBar.add("New Game", 0, (Fl_Callback*) &restart_cb, &m_cmdRestart);
 	m_menuBar.add("Load", 0, (Fl_Callback*)&load_cb, &m_cmdLoad);
 	m_menuBar.add("Save", 0, (Fl_Callback*)&save_cb, &m_cmdSave);
-	m_viewModel = 0;
+	//m_viewModel = 0;
+	m_col = m_row = 0;
 	resizable(m_starMapView);
 }
 
@@ -39,9 +40,21 @@ void MainWindow::attach_SaveCommand(std::function<bool(const std::string&)>&& cf
 	m_cmdSave = std::move(cf);
 }
 
-void MainWindow::attach_viewModel(StarMapVM* vm) {
-	m_viewModel = vm;
+void MainWindow::attach_getStarmat(std::function<Starmat* ()>&& cf) {
+	getStarmat = std::move(cf);
 }
+
+void MainWindow::attach_row(int*&& cf) {
+	m_row = std::move(cf);
+}
+
+void MainWindow::attach_col(int*&& cf) {
+	m_col = std::move(cf);
+}
+
+/*void MainWindow::attach_viewModel(StarMapVM* vm) {
+	m_viewModel = vm;
+}*/
 
 void MainWindow::restart_cb(Fl_Widget* Wp, void* v) {
 	//Fl_Window win(400, 100, "Game Size");
@@ -83,18 +96,18 @@ void MainWindow::save_cb(Fl_Widget*, void* v)
 	return;
 }
 
-void MainWindow::getStarmat() {
-	m_starMapView.attachStarmat(m_viewModel->getStarmat());
+void MainWindow::setStarmat() {
+	m_starMapView.attachStarmat(getStarmat());
 }
 
 std::function<void(int)> MainWindow::getNotification() {
 	return [this](int uID) {
 		if (uID < 0) {
-			int rows = m_viewModel->getRow();
-			int cols = m_viewModel->getCol();
+			int rows = *m_row;
+			int cols = *m_col;
 			this->size(cols * STAR_BUTTON_DIMENSION, rows * STAR_BUTTON_DIMENSION + MENU_BAR_HEIGHT);
 			m_starMapView.reinitialize(rows, cols);
-			this->getStarmat();
+			this->setStarmat();
 //			redraw();
 		}
 		m_starMapView.updateDriver(uID);

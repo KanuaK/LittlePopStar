@@ -10,7 +10,9 @@ GameApp::GameApp() : m_model(5, 5, 4), m_wndMain(5, 5) {
 	m_model.attachNotification(m_viewmodel.getNotification());
 	m_viewmodel.attachNotification(m_wndMain.getNotification());
 	//properties
-	m_wndMain.attach_viewModel(&m_viewmodel);
+	m_wndMain.attach_row(m_viewmodel.getRow());
+	m_wndMain.attach_col(m_viewmodel.getCol());
+	m_wndMain.attach_getStarmat(m_viewmodel.getStarmatFunc());
 	//m_wndMain.get_StarMapView()->attachStarmat(m_model.getStarmat());
 	//m_wndMain.get_StarMapView().update();
 	

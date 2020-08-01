@@ -42,13 +42,13 @@ int* StarMapVM::getScore() {
 	return 0;
 }
 
-int StarMapVM::getRow() {
-	if (m_refModel != nullptr) return m_refModel->row;
+int* StarMapVM::getRow() {
+	if (m_refModel != nullptr) return &m_refModel->row;
 	return 0;
 }
 
-int StarMapVM::getCol() {
-	if (m_refModel != nullptr) return m_refModel->col;
+int* StarMapVM::getCol() {
+	if (m_refModel != nullptr) return &m_refModel->col;
 	return 0;
 }
 
