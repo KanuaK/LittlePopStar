@@ -6,7 +6,6 @@
 
 #include <string>
 
-#include "../ViewModel/ViewModel.h"
 #include "../View/StarMapView.h"
 
 class MainWindow : public Fl_Window {
